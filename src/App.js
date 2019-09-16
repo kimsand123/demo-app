@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 import {BrowserRouter as Router, Route, Link} from "react-router-dom";
 
@@ -21,7 +21,7 @@ function AppRouter(){
           <nav>
             <ul>
               <li>
-                <link to ="/"> Home</link>
+                <Link to ="/"> Home</Link>
               </li>
               <li>
                 <Link to ="/about/">About</Link>
