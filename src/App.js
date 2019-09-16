@@ -1,8 +1,20 @@
 import React from 'react';
 
 import {BrowserRouter as Router, Route, Link} from "react-router-dom";
+function App(){
+  return(
+      <Router>
+        <div>
+          <Header />
+          <Router exact path="/" component={Home} />
+          <Router path="/about" component={About} />
+          <Router path="/topics" component={Topics} />
+        </div>
+      </Router>
+  );
+}
 
-function Index(){
+function Home(){
   return <h2>Home</h2>;
 }
 
@@ -10,33 +22,43 @@ function About(){
   return <h2>About</h2>;
 }
 
-function Users(){
-  return<h2>Users</h2>
+function Topic({match}){
+  return <h3>Requested Param: {match.params.id}</h3>;
 }
 
-function AppRouter(){
+function Topics({ match }){
   return(
-      <Router>
-        <div>
-          <nav>
-            <ul>
-              <li>
-                <Link to ="/"> Home</Link>
-              </li>
-              <li>
-                <Link to ="/about/">About</Link>
-              </li>
-              <li>
-                <Link to={"/users/"}>Users</Link>
-              </li>
-            </ul>
-          </nav>
-          <Route path="/" exact component={Index} />
-          <Route path="/about/" component={About} />
-          <Route path="/users/" component={Users} />
-        </div>
-      </Router>
+      <div>
+        <h2>Topics</h2>
+        <ul>
+          <li>
+            <Link to={`${match.url}/components`}>Components</Link>
+          </li>
+          <li>
+            <Link to={'${match.url}/props-v-state'}>Props v. State</Link>
+          </li>
+        </ul>
+        <Route path={'${match.path'}/>:id'} component={Topic} /}
+        <Route exact path={match.path} render={()=><h3>Please select a topic</h3>}
+        />
+      </div>
   );
 }
 
-export default AppRouter;
+function Header (){
+  return(
+      <ul>
+        <li>
+          <Link to="/">Home</Link>
+        </li>
+        <li>
+          <Link to="/about">About</Link>
+        </li>
+        <li>
+          <Link to="/topics">Topics</Link>
+        </li>
+      </ul>
+  );
+}
+
+export default App;
